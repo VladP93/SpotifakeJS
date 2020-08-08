@@ -20,7 +20,7 @@ function MenuLeft(props) {
     });
   }, [user]);
 
-  const handlerMenu = (menu) => {
+  const handlerMenu = (e, menu) => {
     setActiveMenu(menu.to);
   };
 
