@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { map } from "lodash";
+import { map, size } from "lodash";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import firebase from "../../../utils/Firebase";
@@ -9,11 +9,20 @@ import "./BasicSliderItems.scss";
 
 export default function BasicSliderItems(props) {
   const { title, data, folderImage, urlName } = props;
+  const [slidesToShow, setSlidesToShow] = useState(1);
+
+  useEffect(() => {
+    if (size(data) < 2 && size(data) !== 0) {
+      setSlidesToShow(size(data));
+    } else {
+      setSlidesToShow(2);
+    }
+  }, [data]);
 
   const settings = {
     dots: false,
     infinity: true,
-    slidesToShow: 2,
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
     centerMode: true,
     className: "basic-slider-items__list",

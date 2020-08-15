@@ -19,12 +19,11 @@ export default function AddArtistForm(props) {
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onDrop = useCallback((acceptedFile) => {
     const file = acceptedFile[0];
     setFile(file);
     setBanner(URL.createObjectURL(file));
-  });
+  }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/jpeg, image/png",
