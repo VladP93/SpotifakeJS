@@ -5,6 +5,7 @@ import { isUserAdmin } from "../../utils/Api";
 import BasicModal from "../Modal/BasicModal";
 import AddArtistForm from "../Artists/AddArtistForm";
 import AddAlbumForm from "../Albums/AddAlbumForm/AddAlbumForm";
+import AddSongForm from "../Songs/AddSongForm";
 
 import "./MenuLeft.scss";
 
@@ -46,7 +47,7 @@ function MenuLeft(props) {
 
       case "song":
         setTitleModal("Nueva Canción");
-        setContentModal(<h2>Form nueva canción</h2>);
+        setContentModal(<AddSongForm setShowModal={setShowModal} />);
         setShowModal(true);
         break;
 
@@ -94,7 +95,7 @@ function MenuLeft(props) {
           <div className="footer">
             <Menu.Item onClick={() => handlerModal("artist")}>
               <Icon name="plus square outline" />
-              Nuevo artista
+              Nuevo Artista
             </Menu.Item>
             <Menu.Item onClick={() => handlerModal("album")}>
               <Icon name="plus square outline" />
@@ -102,7 +103,7 @@ function MenuLeft(props) {
             </Menu.Item>
             <Menu.Item onClick={() => handlerModal("song")}>
               <Icon name="plus square outline" />
-              Nueva canción
+              Nueva Canción
             </Menu.Item>
           </div>
         )}

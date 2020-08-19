@@ -25,14 +25,18 @@ export default function LoggedLayout(props) {
     "https://firebasestorage.googleapis.com/v0/b/spotifakejs.appspot.com/o/song%2FHall%20of%20the%20Mountain%20King.mp3?alt=media&token=13e31f1c-4458-44d3-9843-d9b689f9f97f";
   const nametst = "In the hall of the mountain king";
 
+  if (false) {
+    playerSong(imagetst, urltst, nametst);
+  }
+
   return (
     <Router>
       <Grid className="logged-layout">
         <Grid.Row>
           <Grid.Column width={3}>
-            <button onClick={() => playerSong(imagetst, nametst, urltst)}>
+            {/* <button onClick={() => playerSong(imagetst, nametst, urltst)}>
               Start
-            </button>
+            </button> */}
             <MenuLeft user={user} />
           </Grid.Column>
           <Grid.Column className="content" width={13}>
