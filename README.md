@@ -66,3 +66,12 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## Instrucciones.
+
+Para correr se necesita tener instalado:
+- Google Chrome
+- NodeJS
+- ElectronJS
+
+Y basta con abrir consola, posicionarse en la raíz del proyecto y ejecutar el comando: `npm i` y luego el comando `npm run electron-dev`. Luego se va a desplegar el proyecto en una ventana con acceso al inspector de elementos.
