@@ -4,6 +4,7 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require("path");
 const isDev = require("electron-is-dev");
+const { Menu } = require("semantic-ui-react");
 
 let mainWindow;
 
@@ -16,6 +17,7 @@ function createWindow() {
     title: "SpotifakeJS",
     titleBarStyle: "hiddenInset",
   });
+  mainWindow.setMenuBarVisibility(false);
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
