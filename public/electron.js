@@ -4,7 +4,6 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require("path");
 const isDev = require("electron-is-dev");
-const { Menu } = require("semantic-ui-react");
 
 let mainWindow;
 
