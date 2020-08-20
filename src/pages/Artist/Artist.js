@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { map } from "lodash";
 import BannerArtist from "../../components/Artists/BannerArtist";
 import BasicSliderItems from "../../components/Sliders/BasicSliderItems";
+import SongsSlider from "../../components/Sliders/SongsSlider";
 import firebase from "../../utils/Firebase";
 import "firebase/firestore";
 
@@ -11,9 +12,10 @@ import "./Artist.scss";
 const db = firebase.firestore(firebase);
 
 function Artist(props) {
-  const { match } = props;
+  const { match, playerSong } = props;
   const [artist, setArtist] = useState(null);
   const [albums, setAlbums] = useState([]);
+  const [songs, setSongs] = useState([]);
 
   useEffect(() => {
     db.collection("artists")
@@ -43,6 +45,29 @@ function Artist(props) {
     }
   }, [artist]);
 
+  useEffect(() => {
+    const arraySong = [];
+
+    (async () => {
+      await Promise.all(
+        map(albums, async (album) => {
+          await db
+            .collection("songs")
+            .where("album", "==", album.id)
+            .get()
+            .then((res) => {
+              map(res?.docs, (song) => {
+                const data = song.data();
+                data.id = song.id;
+                arraySong.push(data);
+              });
+            });
+        })
+      );
+      setSongs(arraySong);
+    })();
+  }, [albums]);
+
   return (
     <div>
       {artist && <BannerArtist artist={artist} />}
@@ -51,8 +76,9 @@ function Artist(props) {
           title="Álbumes"
           data={albums}
           folderImage="album"
-          urlName="/album/"
+          urlName="album"
         />
+        <SongsSlider title="Canciones" data={songs} playerSong={playerSong} />
       </div>
     </div>
   );

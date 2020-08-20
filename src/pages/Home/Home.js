@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { map } from "lodash";
 import BannerHome from "../../components/BannerHome";
 import BasicSliderItems from "../../components/Sliders/BasicSliderItems";
+import SongsSlider from "../../components/Sliders/SongsSlider";
 import firebase from "../../utils/Firebase";
 import "firebase/firestore";
 
@@ -9,9 +10,11 @@ import "./Home.scss";
 
 const db = firebase.firestore(firebase);
 
-export default function Home() {
+export default function Home(props) {
+  const { playerSong } = props;
   const [artists, setArtists] = useState([]);
   const [albums, setAlbums] = useState([]);
+  const [songs, setSongs] = useState([]);
 
   useEffect(() => {
     db.collection("artists")
@@ -48,6 +51,22 @@ export default function Home() {
       .catch((err) => {});
   }, []);
 
+  useEffect(() => {
+    db.collection("songs")
+      .limit(10)
+      .get()
+      .then((res) => {
+        const arraySongs = [];
+        map(res?.docs, (song) => {
+          const data = song.data();
+          data.id = song.id;
+
+          arraySongs.push(data);
+        });
+        setSongs(arraySongs);
+      });
+  }, []);
+
   return (
     <>
       <BannerHome />
@@ -63,6 +82,11 @@ export default function Home() {
           data={albums}
           folderImage={"album"}
           urlName={"album"}
+        />
+        <SongsSlider
+          title="Últimas canciones"
+          data={songs}
+          playerSong={playerSong}
         />
       </div>
     </>

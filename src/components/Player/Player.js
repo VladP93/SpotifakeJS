@@ -6,7 +6,7 @@ import "./Player.scss";
 
 export default function Player(props) {
   const { songData } = props;
-  const [playedSeconds, setPlayedSeconds] = useState(25);
+  const [playedSeconds, setPlayedSeconds] = useState(3);
   const [totalSeconds, setTotalSeconds] = useState(300);
   const [playing, setPlaying] = useState(false);
   const [volumen, setVolumen] = useState(0.8);
